@@ -1,6 +1,7 @@
 "use server"
 
-import { addProduct, updateProduct } from "@/primsa-db";
+import { addProduct, deleteProduct, updateProduct } from "@/primsa-db";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export type Errors = {
@@ -60,4 +61,9 @@ export const editProduct = async (id: number, prevState: InitialState, formData:
     await updateProduct(id, title, parseInt(price), description);
 
     redirect('/products-db');
+}
+
+export const removeProduct = async (id: number) => {
+    await deleteProduct(id);
+    revalidatePath('/products-db');
 }

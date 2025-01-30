@@ -6,11 +6,11 @@ export default async function ProductsDbEdit({ params }: { params: Promise<{ id:
     const { id } = await params
 
     const product = await getProduct(parseInt(id))
-    if(!product) {
+    if (!product) {
         notFound()
     }
 
     return (
-        <EditProduct product={product} id={id}/>
+        <EditProduct product={product} id={id} />
     )
 }
